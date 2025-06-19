@@ -1,3 +1,4 @@
+
 fn main() {
     println!("Hello, world!");
 }
@@ -162,4 +163,135 @@ fn test_variable_scope() {
     // Variables can also be declared with different types.
     let z: f64 = 3.14;
     println!("z as f64: {}", z);
+}
+
+#[test]
+fn test_if_statements() {
+    let number = 45;
+
+    if number < 50 {
+        println!("tiadak lulus nilai kamu {}", number);
+    }
+    else if number > 50 && number < 75 {
+        println!("remedial nilai kamu {}", number)
+    }else {
+        println!("kamu lulus nilai kamu {}", number)
+    }
+}
+
+#[test] 
+fn test_loop() {
+
+    let mut count = 1;
+
+    'outer: loop {
+        
+        let mut i = 1;
+
+        loop {
+
+            if count > 10 {
+                break 'outer; // break for yang paling luar..
+            }
+
+            if i > 10 {
+                break;
+            }
+            
+            println!("{} * {} = {}", count, i, count*i);
+            i += 1;
+        }
+
+        count += 1;
+    }
+
+    
+}
+
+#[test]
+fn test_while_loop() {
+
+    let mut count = 0;
+
+    while count < 10 {
+        count += 1;
+
+        if count%2 == 0 {
+            continue;
+        }
+
+        println!("perulangan ke : {}", count);
+    }
+}
+
+#[test]
+fn tes_for_loop() {
+    let array = ["Marwan", "Wae", "Rust", "Programming"];
+    for name in array.iter() {
+        println!("Hello, {}!", name);
+    }
+
+    let count = array.len();
+    for i in 0..count {
+        println!("Perulangan ke: {}, Hello {}", i+1, array[i]);
+    }
+}
+
+fn say_hello() {
+    println!("Hello, Rust!");
+}
+
+#[test]
+fn test_say_hello() {
+    say_hello();
+    say_hello();
+    say_hello();
+
+    let name = String::from("kucur");
+    println!("name {}", name);
+    println!("name {}", name);
+    println!("name {}", name);
+}
+
+fn say_hello_name(first_name: String, last_name: String) {
+    println!("Hello, {} {}!", first_name, last_name);
+}
+
+#[test]
+fn test_say_hello_name() {
+    say_hello_name(String::from("Marwan"), String::from("Wae"));
+    say_hello_name(String::from("sean"), String::from("danish"));
+}
+
+fn factorial_loop(n: u32) -> u32 {
+    let mut result = 1;
+
+    for i in 1..=n {
+
+        result *= i
+    }
+
+    result
+}
+
+#[test]
+fn test_factorial_loop() {
+    let fac_three = factorial_loop(3);
+    let fac_five = factorial_loop(5);
+    println!("result: {}", fac_three);
+    println!("result: {}", fac_five);
+}
+
+fn factorial_recursive(n: u32) -> u32 {
+    if n < 1 {
+        return 1
+    }
+
+    n * factorial_recursive(n-1)
+}
+
+#[test]
+fn test_factorial_recursive() {
+    let res_fac = factorial_recursive(5);
+    println!("factotial recursive {}", res_fac)
 }
