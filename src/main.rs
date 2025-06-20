@@ -227,7 +227,7 @@ fn test_while_loop() {
 #[test]
 fn tes_for_loop() {
     let array = ["Marwan", "Wae", "Rust", "Programming"];
-    for name in array.iter() {
+    for name in array {
         println!("Hello, {}!", name);
     }
 
@@ -235,6 +235,12 @@ fn tes_for_loop() {
     for i in 0..count {
         println!("Perulangan ke: {}, Hello {}", i+1, array[i]);
     }
+
+    for(i, name) in array.iter().enumerate() {
+        println!("perulangan ke-{}, Hello {}", i, name);
+    }
+
+    println!("{:?}", array.iter().enumerate());
 }
 
 fn say_hello() {
@@ -294,4 +300,60 @@ fn factorial_recursive(n: u32) -> u32 {
 fn test_factorial_recursive() {
     let res_fac = factorial_recursive(5);
     println!("factotial recursive {}", res_fac)
+}
+
+fn first_word(s: &String) -> usize {
+    let bytes = s.as_bytes();
+    println!("bytes: {:?}", bytes);
+    println!("b ' ': {:?}", b' ');
+    for (i, &item) in bytes.iter().enumerate() {
+        println!("i: {}, item: {}", i, item);
+        if item == b' ' {
+            return i;
+        }
+    }
+
+    s.len()
+}
+#[test]
+fn test_first_word() {
+    let name = String::from("sean danish alfath");
+    let indx = first_word(&name);
+    let first_name: &str = &name[0..indx];
+    println!("{}", first_name);
+}
+
+    struct Person{
+        first_name: String,
+        last_name: String,
+        age: u8
+    }
+
+#[test]
+fn test_struct() {
+
+    let marwan = Person{
+        first_name: String::from("marwan"),
+        last_name: String::from("wae"),
+        age: 29
+    };
+
+    println!("first name: {}", marwan.first_name);
+    println!("last name: {}", marwan.last_name);
+    println!("age: {}", marwan.age);
+
+    let first_name = String::from("danish");
+
+    let danish = assign_person(&first_name, String::from("alfath"), 4);
+
+    println!("{}, {}, {}", danish.first_name, danish.last_name, danish.age);
+    println!("{}", first_name);
+}
+
+fn assign_person(first_name: &str, last_name: String, age: u8) -> Person {
+    return Person {
+        first_name: first_name.to_string(),
+        last_name,
+        age
+    };
 }
