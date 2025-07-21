@@ -357,3 +357,79 @@ fn assign_person(first_name: &str, last_name: String, age: u8) -> Person {
         age
     };
 }
+
+use std::collections::{BTreeMap, HashMap};
+
+#[test]
+fn test_hash_map() {
+    let mut map = HashMap::<String, String>::new();
+    map.insert(String::from("ani"),String::from("1") );
+    map.insert(String::from("budi"),String::from("2") );
+    map.insert(String::from("cici"),String::from("3") );
+    map.insert(String::from("daru"),String::from("4") );
+    map.insert(String::from("eko"),String::from("5") );
+    map.insert(String::from("fery"),String::from("6") );
+    map.insert(String::from("gina"),String::from("7") );
+    map.insert(String::from("hilal"),String::from("8") );
+
+    for (key, value)  in &map {
+        println!("{} : {}", key, value);
+    }
+
+    println!("{:?}", map);
+}
+
+#[test]
+fn test_btree_map() {
+    let mut map = BTreeMap::<String, String>::new();
+    map.insert(String::from("ani"),String::from("1") );
+    map.insert(String::from("budi"),String::from("2") );
+    map.insert(String::from("cici"),String::from("3") );
+    map.insert(String::from("daru"),String::from("4") );
+    map.insert(String::from("eko"),String::from("5") );
+    map.insert(String::from("fery"),String::from("6") );
+    map.insert(String::from("gina"),String::from("7") );
+    map.insert(String::from("hilal"),String::from("8") );
+
+    for (key, value)  in &map {
+        println!("{} : {}", key, value);
+    }
+
+    println!("{:?}", map);
+}
+
+#[test]
+fn test_iterator() {
+    let array = [1,2,3,4,5,6];
+    let iterator = array.iter();
+
+    println!("{:?}", iterator);
+}
+
+fn connect_cache(host: Option<String>) -> Result<String, String> {
+    match host {
+        None => {
+            return Err("No Cache host provider".to_string());
+        }
+        Some(host) => {
+            return Ok(host);
+        }
+    }
+}
+
+#[test]
+fn test_result() {
+    // let cache = connect_cache(Some("localhost".to_string()));
+    let cache = connect_cache(None);
+
+    // println!("{:?}", cache.is_err());
+
+    match cache {
+        Ok(host) => {
+            println!("Success connect to host: {}", host)
+        }
+        Err(error) => {
+            println!("Error with message: {}", error)
+        }
+    }
+}
